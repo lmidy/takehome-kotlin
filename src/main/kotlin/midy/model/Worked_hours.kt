@@ -3,12 +3,10 @@ package midy.model
 import org.jetbrains.exposed.dao.*
 import org.jetbrains.exposed.dao.id.*
 import org.jetbrains.exposed.dao.id.EntityID
-
 import org.jetbrains.exposed.sql.jodatime.*
-
 import java.sql.*
 
-object Worked_hours : IntIdTable() {
+object WorkedHours : IntIdTable() {
     val user_id = reference("id", Users)
     val date = date("date")
     val hours = varchar("first_name", 50)
@@ -17,12 +15,12 @@ object Worked_hours : IntIdTable() {
 }
 
 class WorkedHoursEntity(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<WorkedHoursEntity>(Worked_hours)
+    companion object : IntEntityClass<WorkedHoursEntity>(WorkedHours)
  //todo add vals and also add fk references
 }
 
 
-data class Worked_hour( //validate this whole section
+data class WorkedHour( //validate this whole section
     val user_id: Int,
     val date: java.sql.Date,
     val hours: String,
