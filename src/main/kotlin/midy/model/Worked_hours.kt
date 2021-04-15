@@ -16,7 +16,7 @@ object WorkedHours : IntIdTable() {
 
 class WorkedHoursEntity(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<WorkedHoursEntity>(WorkedHours)
- //todo add vals and also add fk references
+ //todo add val and also add fk references
 }
 
 
