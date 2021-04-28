@@ -1,13 +1,16 @@
 package midy.repository
 
+import com.typesafe.config.*
 import com.zaxxer.hikari.*
+import io.ktor.application.*
+import io.ktor.config.*
+import io.ktor.server.engine.*
+import kotlinx.coroutines.*
+import org.flywaydb.core.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.*
-import io.ktor.application.Application
+import com.zaxxer.hikari.HikariConfig
 import midy.model.*
-import org.slf4j.*
-
-
 const val HIKARI_CONFIG_KEY = "ktor.hikariconfig"
 
 
@@ -17,7 +20,7 @@ const val HIKARI_CONFIG_KEY = "ktor.hikariconfig"
         val dataSource = HikariDataSource(dbConfig)
         Database.connect(dataSource)
         createTables()
-        LoggerFactory.getLogger(Application::class.simpleName).info("Initialized takehome Database")
+        //LoggerFactory.getLogger(Application::class.simpleName).info("Initialized takehome Database")
     }
 
     private fun createTables() = transaction {

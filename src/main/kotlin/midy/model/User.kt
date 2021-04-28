@@ -8,38 +8,33 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.jodatime.*
 import kotlinx.serialization.Serializable
 
-
+data class UserDTO(
+        val id: EntityID<Int>,
+        val manager_id: Int?,
+        val firstname: String,
+        val lastname: String,
+        val email: String,
+        val active: Boolean
+)
 object Users : IntIdTable() {
-    //val id = integer("id").autoIncrement()
     val manager_id = integer("manager_id").nullable()
-    val first_name = varchar("first_name", 50)
-    val last_name = varchar("last_name", 50)
-    val email = varchar("email", 50)
+    val firstname = varchar("firstname", 50)
+    val lastname = varchar("lastname", 50)
+    val email = varchar("email", 50).uniqueIndex()
     val active = bool("active")
-    val created_at = datetime("created_at")
-    override val primaryKey = PrimaryKey(id, name = "id")
-}
+    val created_at = date("created_at")
+    override val primaryKey = PrimaryKey(id, name="PK_User_ID")
+    override fun toString(): String = "User($id, $firstname, $lastname, $email, $active)"
+    }
 
 class UserEntity(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<UserEntity>(Users)
     var manager_id by Users.manager_id
-    var first_name by Users.first_name
-    var last_name by Users.last_name
+    var firstname by Users.firstname
+    var lastname by Users.lastname
     var email by Users.email
     var active by Users.active
     var created_at by Users.created_at
-
-    //fun toUser() = manager_id?.let { User(id.value, it, first_name, last_name, email, active) }
 }
 
-@Serializable
-data class User(
-    val id: EntityID<Int>,
-    val manager_id: Int?,
-    val firstname: String,
-    val lastname: String,
-    val email: String,
-    val active: Boolean
-)
-
-val userStorage = mutableListOf<User>()
+val userStorage = mutableListOf<UserDTO>()

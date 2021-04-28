@@ -7,5 +7,10 @@ services:
     restart: always
     ports:
       - 5432:5432
-    env_file:
-      - .env.dev
+    environment:
+      - DEBUG=false
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=userhours_dev
+      - POSTGRES_USER=userhours_user
+      - POSTGRES_PASSWORD=Super-e3cret

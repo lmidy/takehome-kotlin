@@ -7,7 +7,7 @@ import io.ktor.routing.*
 import midy.model.*
 import midy.repository.*
 
-val userController = UserController()
+val userController = UserRepository()
 
 fun Route.users() {
 
@@ -27,7 +27,7 @@ fun Route.users() {
             "Worked Hours Not Found",
             status = HttpStatusCode.NotFound
         )
-        call.respond(workedHourStorage)
+        call.respond(workedhoursentry)
     }
 
 
