@@ -8,8 +8,9 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.jodatime.*
 import kotlinx.serialization.Serializable
 
+@Serializable
 data class UserDTO(
-        val id: EntityID<Int>,
+        val id: Int,
         val manager_id: Int?,
         val firstname: String,
         val lastname: String,
@@ -35,6 +36,6 @@ class UserEntity(id: EntityID<Int>) : IntEntity(id) {
     var email by Users.email
     var active by Users.active
     var created_at by Users.created_at
-    fun toUser() = UserDTO(id, manager_id, firstname, lastname, email, active)
+    fun toUser()= UserDTO( id=this.id.value, manager_id, firstname, lastname, email, active)
 }
 val userStorage = mutableListOf<UserDTO>()

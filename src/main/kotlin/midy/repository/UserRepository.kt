@@ -14,7 +14,7 @@ import midy.model.UserDTO
 class UserRepository {
 
     suspend fun getAllUsers(): Iterable<UserDTO> = transaction {
-        UserEntity.all().map(UserEntity::toUser)
+               UserEntity.all().map(UserEntity::toUser)
         }
 }
 

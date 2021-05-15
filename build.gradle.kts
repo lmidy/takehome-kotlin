@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 val ktorversion: String by project
 val kotlinversion: String by project
 val logbackversion: String by project
@@ -11,8 +9,8 @@ val flywayVersion: String by project
 plugins {
     application
     kotlin("jvm") version "1.5.0"
+}
 
- }
 group = "midy"
 version = "0.0.1"
 application {
@@ -38,6 +36,5 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jodatime:$exposedVersion")
     implementation( "com.zaxxer:HikariCP:$hikaricpversion")
     implementation ("org.postgresql:postgresql:42.2.1")
-    implementation(kotlin("stdlib-jdk8"))
 }
 
