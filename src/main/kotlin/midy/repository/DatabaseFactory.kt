@@ -19,9 +19,19 @@ const val HIKARI_CONFIG_KEY = "ktor.hikariconfig"
         val dbConfig = HikariConfig(configPath)
         val dataSource = HikariDataSource(dbConfig)
         Database.connect(dataSource)
-        createTables()
+       // createTables()
         //LoggerFactory.getLogger(Application::class.simpleName).info("Initialized takehome Database")
-    }
+        val appConfig = HoconApplicationConfig(ConfigFactory.load())
+        val dbUrl = appConfig.property("db.jdbcUrl").getString()
+        val dbUser = appConfig.property("db.dbUser").getString()
+        val dbPassword = appConfig.property("db.dbPassword").getString()
+
+
+
+   val flyway = Flyway.configure().dataSource(dbUrl, dbUser, dbPassword).load()
+           flyway.migrate()
+   }
+
 
     private fun createTables() = transaction {
         SchemaUtils.create(

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 val ktorversion: String by project
 val kotlinversion: String by project
 val logbackversion: String by project
@@ -8,16 +10,14 @@ val flywayVersion: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.4.32"
-}
+    kotlin("jvm") version "1.5.0"
 
+ }
 group = "midy"
 version = "0.0.1"
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
-
-
 repositories {
     mavenCentral()
     jcenter()
@@ -32,11 +32,12 @@ dependencies {
     implementation("org.flywaydb:flyway-core:$flywayVersion")
     implementation("com.viartemev:ktor-flyway-feature:$ktorflywayversion")
 
-
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jodatime:$exposedVersion")
     implementation( "com.zaxxer:HikariCP:$hikaricpversion")
     implementation ("org.postgresql:postgresql:42.2.1")
+    implementation(kotlin("stdlib-jdk8"))
 }
+

@@ -35,6 +35,6 @@ class UserEntity(id: EntityID<Int>) : IntEntity(id) {
     var email by Users.email
     var active by Users.active
     var created_at by Users.created_at
+    fun toUser() = UserDTO(id, manager_id, firstname, lastname, email, active)
 }
-
 val userStorage = mutableListOf<UserDTO>()

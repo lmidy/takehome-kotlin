@@ -17,7 +17,7 @@ object WorkedHours : Table("worked_hours") {
 }
 
 @Serializable
-data class WorkedHour( //validate this whole section
+data class WorkedHour(
     val user_id: Int,
     val date: java.sql.Date,
     val hours: String,
