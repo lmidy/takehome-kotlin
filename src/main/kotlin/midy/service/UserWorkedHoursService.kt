@@ -32,6 +32,7 @@ class UserWorkedHoursService {
 		Users.slice(Users.id,Users.firstname, Users.lastname, Users.email).
 		select { Users.id eq id}.map {maptoUserDTO(it)}
 	}
+	//TODO: validate this user is valid user in db
 
 	fun maptoUserDTO(row: ResultRow): UserDTO =
 		UserDTO(

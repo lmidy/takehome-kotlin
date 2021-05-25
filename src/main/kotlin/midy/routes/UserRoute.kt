@@ -33,6 +33,8 @@ fun Route.users() {
             call.respond(user_id)
         }
     }
+    //TODO: implement valid user id function in service
+    //TODO: Service - implement join of passed userid to worked hours table
 
     post("users/{id}/worked_hours") {
         val userWorkedHourDto= call.receive<WorkedHourDTO>()
