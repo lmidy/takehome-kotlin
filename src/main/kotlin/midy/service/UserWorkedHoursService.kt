@@ -1,5 +1,6 @@
 package midy.service
 
+import io.ktor.http.HttpHeaders.Date
 import midy.dto.*
 import midy.model.*
 import midy.service.DatabaseFactory.dbQuery
@@ -24,6 +25,14 @@ class UserWorkedHoursService {
 		select { WorkedHours.user_id eq id}.map {maptoUserWorkedHourDTO(it)}
 	}
 
+	/**
+	 * Gets a particular user
+	 */
+	suspend fun getUserId(id: Int): List<UserDTO> = dbQuery {
+		Users.slice(Users.id,Users.firstname, Users.lastname, Users.email).
+		select { Users.id eq id}.map {maptoUserDTO(it)}
+	}
+
 	fun maptoUserDTO(row: ResultRow): UserDTO =
 		UserDTO(
 			id = row[Users.id],
@@ -34,17 +43,17 @@ class UserWorkedHoursService {
 
 	fun maptoUserWorkedHourDTO(it: ResultRow): UserWorkedHourDto =
 		UserWorkedHourDto(
-			id = it[WorkedHours.user_id],
+			user_id = it[WorkedHours.user_id],
 			date = it[WorkedHours.date].toString("yyyy-mm-dd"),
 			hours = it[WorkedHours.hours]
 		)
 
 //	val currentTimestamp = System.currentTimeMillis()
-//	fun insert(workedhour: UserWorkedHourDto): UserWorkedHourDto = dbQuery {
+//	fun addWorkedHours(workedHourDTO: WorkedHourDTO): UserWorkedHourDto = dbQuery {
 //		WorkedHours.insert {
 //			it[WorkedHours.date] = date,
-//			it[WorkedHours.hours] = hours
-//			it[WorkedHours.created_at]= System.Date()
+//			it[WorkedHours.hours] = hours,
+//			it[WorkedHours.created_at]= currentTimestamp
 //		}
 //	}
 }

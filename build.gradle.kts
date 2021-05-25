@@ -27,8 +27,9 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:$ktorversion")
     implementation("ch.qos.logback:logback-classic:$logbackversion")
     testImplementation("io.ktor:ktor-server-tests:$ktorversion")
-    implementation ("io.ktor:ktor-serialization:$ktorversion")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
+
+    implementation("io.ktor:ktor-gson:$ktorversion")
+
     implementation("org.flywaydb:flyway-core:$flywayVersion")
     implementation("com.viartemev:ktor-flyway-feature:$ktorflywayversion")
 
@@ -36,7 +37,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jodatime:$exposedVersion")
-    implementation( "com.zaxxer:HikariCP:$hikaricpversion")
-    implementation ("org.postgresql:postgresql:42.2.1")
+    implementation("com.zaxxer:HikariCP:$hikaricpversion")
+    implementation("org.postgresql:postgresql:42.2.1")
 }
 

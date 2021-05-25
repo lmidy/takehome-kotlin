@@ -21,17 +21,24 @@ fun Route.users() {
         }
 
     get("users/{id}/worked_hours") {
-//        val id= call.parameters["id"].toInt()
-//        val userDTO = call.receive<UserWorkedHourDto>()
-//        userService.getWorkedHours(id)
-        call.respond(HttpStatusCode.OK)
-        call.respond(HttpStatusCode.OK, "We recieved this id: $")
+        val id= call.parameters["id"]!!.toIntOrNull()
+        if(id == null){
+            call.respond(HttpStatusCode.BadRequest, "id parameter must be a number")
+            return@get
+        }
+        val user_id = userService.getUserId(id)
+        if (user_id == null){
+            call.respond(HttpStatusCode.NotFound,"user_id not found")
+        } else {
+            call.respond(user_id)
+        }
     }
 
-    post("users/{three}/worked_hours") {
-        val userWorkedHourDto= call.receive<UserWorkedHourDto>()
-        //userService.insert(UserWorkedHourDto)
-        call.respond(HttpStatusCode.Created)
+    post("users/{id}/worked_hours") {
+        val userWorkedHourDto= call.receive<WorkedHourDTO>()
+       // val workedhour = userService.addWorkedHours(userWorkedHourDto)
+        //call.respond(workedhour)
+        call.respond(userWorkedHourDto)
 
     }
 

@@ -1,6 +1,5 @@
 package midy.model
 
-import kotlinx.serialization.*
 import org.jetbrains.exposed.dao.*
 import org.jetbrains.exposed.dao.id.*
 import org.jetbrains.exposed.dao.id.EntityID

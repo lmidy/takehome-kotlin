@@ -4,13 +4,13 @@ import com.viartemev.ktor.flyway.*
 import io.ktor.application.*
 import io.ktor.application.install
 import io.ktor.features.*
+import io.ktor.gson.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import midy.routes.*
 import org.jetbrains.exposed.dao.exceptions.*
 import io.ktor.http.HttpStatusCode.Companion.NotFound
-import io.ktor.serialization.*
 import midy.service.*
 import org.jetbrains.exposed.sql.*
 
@@ -25,7 +25,9 @@ fun Application.module(testing: Boolean = false) {
 
     install(CallLogging)
     install(ContentNegotiation) {
-        json()
+        gson(
+
+        )
     }
 
     install(StatusPages) {

@@ -1,8 +1,7 @@
 package midy.dto
 
 
-data class UserWorkedHourDto(
-	val user_id: Int,
+data class WorkedHourDTO(
 	val date: String,
 	val hours: String
 )
