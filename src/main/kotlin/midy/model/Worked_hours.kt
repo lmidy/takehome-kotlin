@@ -1,26 +1,23 @@
 package midy.model
 
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import org.jetbrains.exposed.dao.*
 import org.jetbrains.exposed.dao.id.*
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.jodatime.*
 import java.sql.*
+import java.sql.Date
 
+/**
+ * Code representation of the Worked Hours table database DDL
+ */
 object WorkedHours : Table("worked_hours") {
-    val user_id = reference("user_id", Users)
+    val user_id = integer("id").references(Users.id)
     val date = date("date")
     val hours = varchar("hours", 50)
     val created_at = datetime("created_at")
     override val primaryKey = PrimaryKey(user_id, name = "worked_hours_pkey")
 }
 
-@Serializable
-data class WorkedHour(
-    val user_id: Int,
-    val date: java.sql.Date,
-    val hours: String,
-    val created_at: Timestamp
-)
-val workedHourStorage = mutableListOf<WorkedHour>()
+

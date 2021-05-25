@@ -1,5 +1,6 @@
 package midy
 
+import com.viartemev.ktor.flyway.*
 import io.ktor.application.*
 import io.ktor.application.install
 import io.ktor.features.*
@@ -10,7 +11,8 @@ import midy.routes.*
 import org.jetbrains.exposed.dao.exceptions.*
 import io.ktor.http.HttpStatusCode.Companion.NotFound
 import io.ktor.serialization.*
-import midy.repository.*
+import midy.service.*
+import org.jetbrains.exposed.sql.*
 
 
 fun main(args: Array<String>): Unit =
@@ -32,7 +34,13 @@ fun Application.module(testing: Boolean = false) {
         }
     }
 
-    initDB()
+    val db = DatabaseFactory.create()
+    Database.connect(db)
+    install(FlywayFeature) {
+        dataSource = db
+    }
+
+
     install(Routing){
 
         routing {

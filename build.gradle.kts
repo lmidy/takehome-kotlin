@@ -9,6 +9,7 @@ val flywayVersion: String by project
 plugins {
     application
     kotlin("jvm") version "1.5.0"
+    kotlin("plugin.serialization") version "1.5.0"
 }
 
 group = "midy"
@@ -27,6 +28,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logbackversion")
     testImplementation("io.ktor:ktor-server-tests:$ktorversion")
     implementation ("io.ktor:ktor-serialization:$ktorversion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
     implementation("org.flywaydb:flyway-core:$flywayVersion")
     implementation("com.viartemev:ktor-flyway-feature:$ktorflywayversion")
 
