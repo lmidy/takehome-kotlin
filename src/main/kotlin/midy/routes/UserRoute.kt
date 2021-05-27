@@ -21,16 +21,21 @@ fun Route.users() {
         }
 
     get("users/{id}/worked_hours") {
-        val id= call.parameters["id"]!!.toIntOrNull()
+        val id= call.parameters["id"]!!.toInt()
+        val uid = userService.getUserId(id)
         if(id == null){
             call.respond(HttpStatusCode.BadRequest, "id parameter must be a number")
             return@get
         }
-        val user_id = userService.getUserId(id)
-        if (user_id == null){
-            call.respond(HttpStatusCode.NotFound,"user_id not found")
-        } else {
-            call.respond(user_id)
+
+        val workedhours = userService.getWorkedHours(id)
+        if (workedhours.isEmpty() and uid.isEmpty()){
+            call.respond(HttpStatusCode.OK,"User not found")
+        }
+        if(uid.isNotEmpty()){
+            call.respond(HttpStatusCode.OK, "No hours for this user")
+        }else {
+            call.respond(HttpStatusCode.OK, workedhours)
         }
     }
     //TODO: implement valid user id function in service
@@ -40,7 +45,7 @@ fun Route.users() {
         val userWorkedHourDto= call.receive<WorkedHourDTO>()
        // val workedhour = userService.addWorkedHours(userWorkedHourDto)
         //call.respond(workedhour)
-        call.respond(userWorkedHourDto)
+        call.respond(HttpStatusCode.Created, "Added worked hours for: $userWorkedHourDto")
 
     }
 

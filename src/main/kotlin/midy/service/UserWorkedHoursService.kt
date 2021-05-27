@@ -1,5 +1,6 @@
 package midy.service
 
+
 import io.ktor.http.HttpHeaders.Date
 import midy.dto.*
 import midy.model.*
@@ -21,8 +22,12 @@ class UserWorkedHoursService {
 	 * Lists all worked hours for a particular user
 	 */
 	suspend fun getWorkedHours(id: Int): List<UserWorkedHourDto> = dbQuery {
-		WorkedHours.slice(WorkedHours.user_id, WorkedHours.date, WorkedHours.hours).
-		select { WorkedHours.user_id eq id}.map {maptoUserWorkedHourDTO(it)}
+		(Users innerJoin WorkedHours)
+			.select {
+				Users.id.eq(id) and WorkedHours.user_id.eq(id)
+			}
+			.map {maptoUserWorkedHourDTO(it)
+			}.toList()
 	}
 
 	/**
@@ -46,7 +51,7 @@ class UserWorkedHoursService {
 		UserWorkedHourDto(
 			user_id = it[WorkedHours.user_id],
 			date = it[WorkedHours.date].toString("yyyy-mm-dd"),
-			hours = it[WorkedHours.hours]
+			hours = it[WorkedHours.hours].toString()
 		)
 
 //	val currentTimestamp = System.currentTimeMillis()

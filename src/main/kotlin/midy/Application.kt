@@ -13,6 +13,7 @@ import org.jetbrains.exposed.dao.exceptions.*
 import io.ktor.http.HttpStatusCode.Companion.NotFound
 import midy.service.*
 import org.jetbrains.exposed.sql.*
+import java.text.*
 
 
 fun main(args: Array<String>): Unit =
@@ -25,9 +26,11 @@ fun Application.module(testing: Boolean = false) {
 
     install(CallLogging)
     install(ContentNegotiation) {
-        gson(
+        gson {
+            setDateFormat(DateFormat.LONG)
+            setPrettyPrinting()
+        }
 
-        )
     }
 
     install(StatusPages) {
