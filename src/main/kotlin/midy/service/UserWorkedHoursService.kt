@@ -35,7 +35,16 @@ class UserWorkedHoursService {
 		Users.slice(Users.id,Users.firstname, Users.lastname, Users.email).
 		select { Users.id eq id}.map {maptoUserDTO(it)}
 	}
-	//TODO: validate this user is valid user in db
+
+	suspend fun addWorkedHours(userWorkedHourDto: UserWorkedHourDto ) = dbQuery {
+		//val current_time = System.currentTimeMillis()
+		WorkedHours.insert {
+			it[WorkedHours.id] = id
+			it[WorkedHours.date] = date
+			it[WorkedHours.hours] = hours
+			it[WorkedHours.created_at] = created_at
+		}
+	}
 
 	fun maptoUserDTO(row: ResultRow): UserDTO =
 		UserDTO(
@@ -48,18 +57,12 @@ class UserWorkedHoursService {
 	fun maptoUserWorkedHourDTO(it: ResultRow): UserWorkedHourDto =
 		UserWorkedHourDto(
 			id = it[WorkedHours.id],
-			date = it[WorkedHours.date].toString("yyyy-mm-dd"),
-			hours = it[WorkedHours.hours].toString()
+			date = it[WorkedHours.date].toString(),
+			hours = it[WorkedHours.hours].toString(),
+			created_at = it[WorkedHours.created_at]
 		)
 
-//	val currentTimestamp = System.currentTimeMillis()
-//	fun addWorkedHours(workedHourDTO: WorkedHourDTO): UserWorkedHourDto = dbQuery {
-//		WorkedHours.insert {
-//			it[WorkedHours.date] = date,
-//			it[WorkedHours.hours] = hours,
-//			it[WorkedHours.created_at]= currentTimestamp
-//		}
-//	}
+
 }
 
 

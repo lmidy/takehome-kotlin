@@ -9,6 +9,11 @@ import midy.dto.*
 import midy.model.*
 import midy.service.*
 import org.jetbrains.exposed.sql.*
+import org.joda.time.*
+import org.joda.time.LocalDateTime.now
+import java.sql.DriverManager.println
+import java.time.LocalDate.now
+import java.time.LocalDateTime
 import java.util.*
 
 val userService = UserWorkedHoursService()
@@ -34,14 +39,22 @@ fun Route.users() {
             call.respond(HttpStatusCode.OK, workedhours)
         }
     }
-    //TODO: implement valid user id function in service
-    //TODO: Service - implement join of passed userid to worked hours table
 
     post("users/{id}/worked_hours") {
-        val userWorkedHourDto= call.receive<WorkedHourDTO>()
-       // val workedhour = userService.addWorkedHours(userWorkedHourDto)
+        val id = call.parameters["id"]!!.toInt()
+        val current_time = DateTime()
+        val request= call.receive<WorkedHourDTO>()
+        val userworkedhour = UserWorkedHourDto(
+            id = id,
+            date = request.date,
+            hours = request.hours,
+            created_at = current_time
+        )
+
+        println(userworkedhour)
+        val addedresult = userService.addWorkedHours(userworkedhour)
         //call.respond(workedhour)
-        call.respond(HttpStatusCode.Created, "Added worked hours for: $userWorkedHourDto")
+        call.respond(HttpStatusCode.Created, "Added worked hours for: $addedresult")
 
     }
 
