@@ -21,18 +21,14 @@ fun Route.users() {
         }
 
     get("users/{id}/worked_hours") {
-        val id= call.parameters["id"]!!.toInt()
+        val id = call.parameters["id"]!!.toInt()
         val uid = userService.getUserId(id)
-        if(id == null){
-            call.respond(HttpStatusCode.BadRequest, "id parameter must be a number")
-            return@get
-        }
 
         val workedhours = userService.getWorkedHours(id)
         if (workedhours.isEmpty() and uid.isEmpty()){
             call.respond(HttpStatusCode.OK,"User not found")
         }
-        if(uid.isNotEmpty()){
+        if(workedhours.isEmpty()){
             call.respond(HttpStatusCode.OK, "No hours for this user")
         }else {
             call.respond(HttpStatusCode.OK, workedhours)

@@ -1,12 +1,10 @@
 package midy.service
 
 
-import io.ktor.http.HttpHeaders.Date
 import midy.dto.*
 import midy.model.*
 import midy.service.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.jodatime.*
 
 class UserWorkedHoursService {
 
@@ -24,7 +22,7 @@ class UserWorkedHoursService {
 	suspend fun getWorkedHours(id: Int): List<UserWorkedHourDto> = dbQuery {
 		(Users innerJoin WorkedHours)
 			.select {
-				Users.id.eq(id) and WorkedHours.user_id.eq(id)
+				Users.id.eq(id) and WorkedHours.id.eq(id)
 			}
 			.map {maptoUserWorkedHourDTO(it)
 			}.toList()
@@ -49,7 +47,7 @@ class UserWorkedHoursService {
 
 	fun maptoUserWorkedHourDTO(it: ResultRow): UserWorkedHourDto =
 		UserWorkedHourDto(
-			user_id = it[WorkedHours.user_id],
+			id = it[WorkedHours.id],
 			date = it[WorkedHours.date].toString("yyyy-mm-dd"),
 			hours = it[WorkedHours.hours].toString()
 		)
