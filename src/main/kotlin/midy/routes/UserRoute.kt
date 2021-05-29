@@ -11,10 +11,13 @@ import midy.service.*
 import org.jetbrains.exposed.sql.*
 import org.joda.time.*
 import org.joda.time.LocalDateTime.now
+import org.joda.time.format.*
 import java.sql.DriverManager.println
 import java.time.LocalDate.now
 import java.time.LocalDateTime
+import java.time.format.*
 import java.util.*
+import org.joda.time.format.DateTimeFormat
 
 val userService = UserWorkedHoursService()
 
@@ -42,19 +45,19 @@ fun Route.users() {
 
     post("users/{id}/worked_hours") {
         val id = call.parameters["id"]!!.toInt()
-        val current_time = DateTime()
+        val formatter = DateTimeFormat.forPattern("YYYY-mm-dd")
         val request= call.receive<WorkedHourDTO>()
+        val passeddate = request.date
+        val dt = formatter.parseDateTime(passeddate)
         val userworkedhour = UserWorkedHourDto(
             id = id,
-            date = request.date,
+            date = dt,
             hours = request.hours,
-            created_at = current_time
         )
 
         println(userworkedhour)
         val addedresult = userService.addWorkedHours(userworkedhour)
-        //call.respond(workedhour)
-        call.respond(HttpStatusCode.Created, "Added worked hours for: $addedresult")
+        call.respond(HttpStatusCode.Created, addedresult)
 
     }
 

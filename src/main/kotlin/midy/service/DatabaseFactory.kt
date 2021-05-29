@@ -40,7 +40,6 @@ import javax.sql.*
 
 
         suspend fun <T> dbQuery(
-            block: suspend () -> T
-        ): T = newSuspendedTransaction { block() }
+            block: suspend () -> T): T = newSuspendedTransaction { block() }
     }
 

@@ -5,6 +5,8 @@ import midy.dto.*
 import midy.model.*
 import midy.service.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.*
+import java.time.format.*
+import java.util.*
 
 class UserWorkedHoursService {
 
@@ -19,12 +21,12 @@ class UserWorkedHoursService {
 	/**
 	 * Lists all worked hours for a particular user
 	 */
-	suspend fun getWorkedHours(id: Int): List<UserWorkedHourDto> = dbQuery {
+	suspend fun getWorkedHours(id: Int): List<UserWorkedHourDtoString> = dbQuery {
 		(Users innerJoin WorkedHours)
 			.select {
 				Users.id.eq(id) and WorkedHours.id.eq(id)
 			}
-			.map {maptoUserWorkedHourDTO(it)
+			.map {maptoUserWorkedHourDTOString(it)
 			}.toList()
 	}
 
@@ -37,12 +39,10 @@ class UserWorkedHoursService {
 	}
 
 	suspend fun addWorkedHours(userWorkedHourDto: UserWorkedHourDto ) = dbQuery {
-		//val current_time = System.currentTimeMillis()
 		WorkedHours.insert {
-			it[WorkedHours.id] = id
-			it[WorkedHours.date] = date
-			it[WorkedHours.hours] = hours
-			it[WorkedHours.created_at] = created_at
+			it[id] = userWorkedHourDto.id
+			it[date] = userWorkedHourDto.date
+			it[hours] = userWorkedHourDto.hours.toBigDecimal()
 		}
 	}
 
@@ -57,9 +57,15 @@ class UserWorkedHoursService {
 	fun maptoUserWorkedHourDTO(it: ResultRow): UserWorkedHourDto =
 		UserWorkedHourDto(
 			id = it[WorkedHours.id],
-			date = it[WorkedHours.date].toString(),
+			date = it[WorkedHours.date],
 			hours = it[WorkedHours.hours].toString(),
-			created_at = it[WorkedHours.created_at]
+		)
+
+	fun maptoUserWorkedHourDTOString(it: ResultRow): UserWorkedHourDtoString =
+		UserWorkedHourDtoString(
+			id = it[WorkedHours.id],
+			date = it[WorkedHours.date].toString("YYYY-MM-DD"),
+			hours = it[WorkedHours.hours].toString(),
 		)
 
 
