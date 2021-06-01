@@ -49,10 +49,11 @@ fun Route.users() {
         val request= call.receive<WorkedHourDTO>()
         val passeddate = request.date
         val dt = formatter.parseDateTime(passeddate)
+        val decimalhours= request.hours.toBigDecimal()
         val userworkedhour = UserWorkedHourDto(
             id = id,
             date = dt,
-            hours = request.hours,
+            hours = decimalhours,
         )
 
         println(userworkedhour)

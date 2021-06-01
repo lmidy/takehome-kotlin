@@ -2,11 +2,12 @@ package midy.dto
 
 
 import org.joda.time.*
+import java.math.*
 
 data class UserWorkedHourDto(
 	val id: Int,
 	val date: DateTime,
-	val hours: String,
+	val hours: BigDecimal,
 )
 
 data class UserWorkedHourDtoString(

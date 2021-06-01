@@ -26,7 +26,7 @@ fun Application.module(testing: Boolean = false) {
     install(CallLogging)
     install(ContentNegotiation) {
         gson {
-            setDateFormat("YYYY-MM-DD")
+            setDateFormat("yyyy-MM-dd")
             setPrettyPrinting()
         }
 

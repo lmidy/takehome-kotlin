@@ -42,7 +42,7 @@ class UserWorkedHoursService {
 		WorkedHours.insert {
 			it[id] = userWorkedHourDto.id
 			it[date] = userWorkedHourDto.date
-			it[hours] = userWorkedHourDto.hours.toBigDecimal()
+			it[hours] = userWorkedHourDto.hours
 		}
 	}
 
@@ -58,13 +58,13 @@ class UserWorkedHoursService {
 		UserWorkedHourDto(
 			id = it[WorkedHours.id],
 			date = it[WorkedHours.date],
-			hours = it[WorkedHours.hours].toString(),
+			hours = it[WorkedHours.hours],
 		)
 
 	fun maptoUserWorkedHourDTOString(it: ResultRow): UserWorkedHourDtoString =
 		UserWorkedHourDtoString(
 			id = it[WorkedHours.id],
-			date = it[WorkedHours.date].toString("YYYY-MM-DD"),
+			date = it[WorkedHours.date].toString("yyyy-MM-dd"),
 			hours = it[WorkedHours.hours].toString(),
 		)
 
