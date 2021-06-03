@@ -1,14 +1,8 @@
 package midy.model
 
-
-import midy.model.WorkedHours.defaultExpression
-import org.jetbrains.exposed.dao.*
-import org.jetbrains.exposed.dao.id.*
-import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.jodatime.*
-
-
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.jodatime.CurrentDateTime
+import org.jetbrains.exposed.sql.jodatime.datetime
 
 /**
  * Code representation of the users table in database DDL
@@ -21,8 +15,5 @@ object Users : Table() {
     val email = varchar("email", 50).uniqueIndex()
     val active = bool("active")
     val created_at = datetime("created_at").defaultExpression(CurrentDateTime())
-    override val primaryKey = PrimaryKey(id, name="PK_User_ID")
-    }
-
-
-
+    override val primaryKey = PrimaryKey(id, name = "PK_User_ID")
+}

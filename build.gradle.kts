@@ -10,6 +10,7 @@ plugins {
     application
     kotlin("jvm") version "1.5.0"
     kotlin("plugin.serialization") version "1.5.0"
+    id("org.jmailen.kotlinter") version "3.4.4"
 }
 
 group = "midy"
@@ -40,5 +41,6 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
     implementation("com.zaxxer:HikariCP:$hikaricpversion")
     implementation("org.postgresql:postgresql:42.2.1")
-}
 
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+}

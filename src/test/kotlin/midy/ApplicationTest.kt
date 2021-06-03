@@ -1,12 +1,9 @@
 package midy
 
-import io.ktor.routing.*
-import io.ktor.http.*
-import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
-import kotlin.test.*
-import io.ktor.server.testing.*
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.testing.* // ktlint-disable no-wildcard-imports
+import kotlin.test.* // ktlint-disable no-wildcard-imports
 
 class ApplicationTest {
     @Test
