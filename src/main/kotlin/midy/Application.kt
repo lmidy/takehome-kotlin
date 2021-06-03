@@ -11,8 +11,10 @@ import io.ktor.routing.*
 import midy.routes.*
 import org.jetbrains.exposed.dao.exceptions.*
 import io.ktor.http.HttpStatusCode.Companion.NotFound
+import midy.model.*
 import midy.service.*
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.*
 
 
 fun main(args: Array<String>): Unit =
@@ -40,11 +42,18 @@ fun Application.module(testing: Boolean = false) {
 
     val db = DatabaseFactory.create()
     Database.connect(db)
-    install(FlywayFeature) {
-        dataSource = db
+
+    transaction {
+        addLogger(StdOutSqlLogger)
+        SchemaUtils.create(Users, WorkedHours)
     }
 
-
+    install(FlywayFeature) {
+        dataSource = db
+        locations = arrayOf("resources/db/migration")
+        commands(Clean, Baseline, Migrate)
+        schemas= arrayOf("V1.0_DataLoad.sql")
+    }
     install(Routing){
 
         routing {

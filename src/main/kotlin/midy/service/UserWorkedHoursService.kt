@@ -24,7 +24,7 @@ class UserWorkedHoursService {
 	suspend fun getWorkedHours(id: Int): List<UserWorkedHourDtoString> = dbQuery {
 		(Users innerJoin WorkedHours)
 			.select {
-				Users.id.eq(id) and WorkedHours.id.eq(id)
+				Users.id.eq(id) and WorkedHours.user_id.eq(id)
 			}
 			.map {maptoUserWorkedHourDTOString(it)
 			}.toList()
@@ -40,7 +40,7 @@ class UserWorkedHoursService {
 
 	suspend fun addWorkedHours(userWorkedHourDto: UserWorkedHourDto ) = dbQuery {
 		WorkedHours.insert {
-			it[id] = userWorkedHourDto.id
+			it[user_id] = userWorkedHourDto.id
 			it[date] = userWorkedHourDto.date
 			it[hours] = userWorkedHourDto.hours
 		}
@@ -56,14 +56,14 @@ class UserWorkedHoursService {
 
 	fun maptoUserWorkedHourDTO(it: ResultRow): UserWorkedHourDto =
 		UserWorkedHourDto(
-			id = it[WorkedHours.id],
+			id = it[WorkedHours.user_id],
 			date = it[WorkedHours.date],
 			hours = it[WorkedHours.hours],
 		)
 
 	fun maptoUserWorkedHourDTOString(it: ResultRow): UserWorkedHourDtoString =
 		UserWorkedHourDtoString(
-			id = it[WorkedHours.id],
+			id = it[WorkedHours.user_id],
 			date = it[WorkedHours.date].toString("yyyy-MM-dd"),
 			hours = it[WorkedHours.hours].toString(),
 		)
