@@ -28,7 +28,5 @@ object DatabaseFactory {
         return HikariDataSource(config)
     }
 
-    suspend fun <T> dbQuery(
-        block: suspend () -> T
-    ): T = newSuspendedTransaction { block() }
+    suspend fun <T> dbQuery(block: suspend () -> T): T = newSuspendedTransaction { block() }
 }

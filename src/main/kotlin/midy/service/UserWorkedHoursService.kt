@@ -50,7 +50,7 @@ class UserWorkedHoursService {
         }
     }
 
-    fun maptoUserDTO(row: ResultRow): UserDTO =
+    private fun maptoUserDTO(row: ResultRow): UserDTO =
         UserDTO(
             id = row[Users.id],
             firstname = row[Users.firstname],
@@ -65,7 +65,7 @@ class UserWorkedHoursService {
             hours = it[WorkedHours.hours],
         )
 
-    fun maptoUserWorkedHourDTOString(it: ResultRow): UserWorkedHoursDTOResponse =
+    private fun maptoUserWorkedHourDTOString(it: ResultRow): UserWorkedHoursDTOResponse =
         UserWorkedHoursDTOResponse(
             id = it[WorkedHours.user_id],
             date = it[WorkedHours.date].toString("yyyy-MM-dd"),

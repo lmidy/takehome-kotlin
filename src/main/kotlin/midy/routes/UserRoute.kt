@@ -1,18 +1,16 @@
 package midy.routes
 
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.application.* // ktlint-disable no-wildcard-imports
+import io.ktor.http.* // ktlint-disable no-wildcard-imports
+import io.ktor.request.* // ktlint-disable no-wildcard-imports
+import io.ktor.response.* // ktlint-disable no-wildcard-imports
+import io.ktor.routing.* // ktlint-disable no-wildcard-imports
 import midy.dto.UserWorkedHourDTO
 import midy.dto.WorkedHourDTO
-import midy.model.*
-import midy.service.*
-import org.joda.time.format.*
+import midy.service.UserWorkedHoursService
+import org.joda.time.format.* // ktlint-disable no-wildcard-imports
 import org.joda.time.format.DateTimeFormat
-import java.time.format.*
-import java.util.*
+import java.time.format.* // ktlint-disable no-wildcard-imports
 
 val userService = UserWorkedHoursService()
 
