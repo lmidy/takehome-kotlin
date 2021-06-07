@@ -5,11 +5,10 @@ import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import midy.dto.*
+import midy.dto.UserWorkedHourDTO
+import midy.dto.WorkedHourDTO
 import midy.model.*
 import midy.service.*
-import org.jetbrains.exposed.sql.*
-import org.joda.time.*
 import org.joda.time.format.*
 import org.joda.time.format.DateTimeFormat
 import java.time.format.*
@@ -26,7 +25,6 @@ fun Route.users() {
     get("users/{id}/worked_hours") {
         val id = call.parameters["id"]!!.toInt()
         val uid = userService.getUserId(id)
-
         val workedhours = userService.getWorkedHours(id)
         if (workedhours.isEmpty() and uid.isEmpty()) {
             call.respond(HttpStatusCode.OK, "User not found")
@@ -45,7 +43,7 @@ fun Route.users() {
         val passeddate = request.date
         val dt = formatter.parseDateTime(passeddate)
         val decimalhours = request.hours.toBigDecimal()
-        val userworkedhour = UserWorkedHourDto(
+        val userworkedhour = UserWorkedHourDTO(
             id = id,
             date = dt,
             hours = decimalhours,
