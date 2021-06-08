@@ -44,7 +44,6 @@ fun Application.module(testing: Boolean = false) {
 	flyway.migrate()
 
 	install(Routing) {
-
 		routing {
 			apiRoute()
 			get("/") {
