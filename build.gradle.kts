@@ -11,6 +11,7 @@ plugins {
     kotlin("jvm") version "1.5.0"
     kotlin("plugin.serialization") version "1.5.0"
     id("org.jmailen.kotlinter") version "3.4.4"
+    id("org.flywaydb.flyway") version "5.2.4"
 }
 
 group = "midy"
@@ -32,7 +33,6 @@ dependencies {
     implementation("io.ktor:ktor-gson:$ktorversion")
 
     implementation("org.flywaydb:flyway-core:$flywayVersion")
-    implementation("com.viartemev:ktor-flyway-feature:$ktorflywayversion")
 
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
@@ -43,4 +43,12 @@ dependencies {
     implementation("org.postgresql:postgresql:42.2.1")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
+}
+
+flyway {
+    url = System.getenv("DB_URL")
+    user = System.getenv("DB_USER")
+    password = System.getenv("DB_PASSWORD")
+    baselineOnMigrate = true
+    locations = arrayOf("classpath:resources/db/migration")
 }
