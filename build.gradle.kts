@@ -5,11 +5,11 @@ val exposedVersion: String by project
 val hikaricpversion: String by project
 val ktorflywayversion: String by project
 val flywayVersion: String by project
+val postgresVersion: String by project
 
 plugins {
     application
     kotlin("jvm") version "1.5.0"
-    kotlin("plugin.serialization") version "1.5.0"
     id("org.jmailen.kotlinter") version "3.4.4"
     id("org.flywaydb.flyway") version "5.2.4"
 }
@@ -40,9 +40,10 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jodatime:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
     implementation("com.zaxxer:HikariCP:$hikaricpversion")
-    implementation("org.postgresql:postgresql:42.2.1")
+    implementation("org.postgresql:postgresql:$postgresVersion")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$ktorversion")
+
 }
 
 flyway {
