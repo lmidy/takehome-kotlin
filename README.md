@@ -3,6 +3,7 @@ This project is an attempt to complete the [SpotHero Engineering Manager Take Ho
 
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 [![language](https://img.shields.io/badge/language-Kotlin-blue)](https://kotlinlang.org/)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.4.32-blue.svg?logo=kotlin)](http://kotlinlang.org)
 
 ## Libraries used:
 - [Kotlin](https://github.com/JetBrains/kotlin) - Programming Language
@@ -14,7 +15,7 @@ This project is an attempt to complete the [SpotHero Engineering Manager Take Ho
 ## Ktor Features  
 - [gson](https://ktor.io/docs/gson.html) - Serialization
 - [call logging](https://ktor.io/docs/logging.html#call_logging) - Log incoming client requests
-- [status pages](https://ktor.io/docs/gson.html) - Simple interception patterns for calls that result in Not Found exception
+- [status pages](https://ktor.io/docs/gson.html) - Simple interception patterns for calls that result in exceptions
 - [routing](https://ktor.io/docs/routing-in-ktor.html) - Core ktor plugin, used to define multiple route handlers
 
 
@@ -97,5 +98,17 @@ curl -d '{"date": "2021-01-11","hours":5.24}' -H "Content-Type: application/json
   
 - Application.kt - main class 
 ```
-
+#### Script
+```
+takehome_verification.sh has curl requests for positive and several negative test cases
+``` 
+### Debt / Future Enhancements
+1. Add [Valiktor](https://github.com/valiktor/valiktor) for validation
+2. Add MockK and jacoco to project [Sample](https://github.com/Kotlin/kotlin-fullstack-sample/pull/28/files#diff-eade18fbfd0abfb6338dbfa647b3215dR17)
+3. Add [detekt](https://github.com/detekt/detekt)
+4. Enhance dockerfile to run full API in Docker
+5. Adding location ktor feature
+6. Clean up userService, improve [exception configuration](https://ktor.io/docs/status-pages.html) 
+7. Do performance testing with [k6](https://k6.io/docs/using-k6/scenarios/) 
+8. Add [swagger-codegen](https://github.com/swagger-api/swagger-codegen)
 

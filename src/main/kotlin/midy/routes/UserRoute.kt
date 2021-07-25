@@ -61,7 +61,7 @@ fun Route.users() {
                 hours = decimalhours,
             )
             val addedresult = userService.addWorkedHours(userworkedhour)
-            call.respond(HttpStatusCode)
+            call.respond(HttpStatusCode.OK, "worked_hour record inserted")
         }
     }
 }
