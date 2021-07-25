@@ -43,13 +43,12 @@ dependencies {
     implementation("org.postgresql:postgresql:$postgresVersion")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$ktorversion")
-
 }
 
 flyway {
-    url = System.getenv("DB_URL")
-    user = System.getenv("DB_USER")
-    password = System.getenv("DB_PASSWORD")
-    baselineOnMigrate = true
-    locations = arrayOf("classpath:resources/db/migration")
+    var url = System.getenv("DB_URL")
+    var user = System.getenv("DB_USER")
+    var password = System.getenv("DB_PASSWORD")
+    var baselineOnMigrate = true
+    var locations = arrayOf("classpath:resources/db/migration")
 }

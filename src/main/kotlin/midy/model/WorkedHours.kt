@@ -10,6 +10,7 @@ import java.math.BigDecimal
 
 /**
  * Code representation of the Worked Hours table database DDL
+ *
  */
 object WorkedHours : Table("worked_hours") {
     val user_id: Column<Int> = integer("user_id").references(Users.id)
