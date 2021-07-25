@@ -2,6 +2,7 @@
 
 package midy
 
+import com.zaxxer.hikari.*
 import io.ktor.application.* // ktlint-disable no-wildcard-imports
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
@@ -49,6 +50,10 @@ fun Application.module(testing: Boolean = false) {
             apiRoute()
             get("/") {
                 call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
+            }
+            get("/healthcheck") {
+                val isAlive = (db as HikariDataSource).isRunning
+                call.respond(HttpStatusCode.OK, "database: $isAlive")
             }
         }
     }
