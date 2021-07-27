@@ -24,6 +24,7 @@ This project is an attempt to complete the [SpotHero Engineering Manager Take Ho
 - Kotlin IntelliJ IDEA Plugin
 - Browser or Terminal
 - Server configured to start on port 3000 vs 8080
+- HTTP Test files for IntelliJ
 
 ## Getting Started
 - Clone the repo `https://github.com/lmidy/takehome-kotlin.git`
