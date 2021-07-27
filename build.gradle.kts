@@ -9,7 +9,7 @@ val postgresVersion: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.5.0"
+    id("org.jetbrains.kotlin.jvm") version "1.5.0"
     id("org.jmailen.kotlinter") version "3.4.4"
     id("org.flywaydb.flyway") version "5.2.4"
 }
@@ -29,6 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:$ktorversion")
     implementation("ch.qos.logback:logback-classic:$logbackversion")
     testImplementation("io.ktor:ktor-server-tests:$ktorversion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     implementation("io.ktor:ktor-gson:$ktorversion")
 

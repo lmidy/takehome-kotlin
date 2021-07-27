@@ -112,3 +112,7 @@ takehome_verification.sh has curl requests for positive and several negative tes
 7. Do performance testing with [k6](https://k6.io/docs/using-k6/scenarios/) 
 8. Add [swagger-codegen](https://github.com/swagger-api/swagger-codegen)
 
+## Known Defects
+2. ERROR: duplicate key value violates unique constraint "worked_hours_pkey" creates false positive
+3. ERROR: Entering more than 40 hours creates false positive
+

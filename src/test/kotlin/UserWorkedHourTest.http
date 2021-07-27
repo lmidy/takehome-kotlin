@@ -1,0 +1,42 @@
+### get all users
+GET http://localhost:3000/v1/users
+Accept: application/json
+
+### get worked hours for user 1
+GET http://localhost:3000/v1/users/1/worked_hours
+Accept: application/json
+
+### post valid worked_hours
+POST http://localhost:3000/v1/users/9/worked_hours
+Content-Type: application/json
+
+{
+  "date": "2021-11-13",
+  "hours": 5.24
+}
+
+### Post worked hours invalid user
+POST http://localhost:3000/v1/users/1000/worked_hours
+Content-Type: application/json
+
+{
+  "date": "2020-10-13",
+  "hours": 5.24
+}
+
+### get worked hours where there are no worked hours
+GET localhost:3000/v1/users/10/worked_hours
+
+### get workedhours for an invalid user
+GET localhost:3000/v1/users/1009/worked_hours
+
+
+### Post invalid worked hours
+POST http://localhost:3000/v1/users/1/worked_hours
+Content-Type: application/json
+
+{
+  "date": "",
+  "hours": 5.24
+}
+
