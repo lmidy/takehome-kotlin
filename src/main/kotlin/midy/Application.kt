@@ -2,7 +2,7 @@
 
 package midy
 
-import com.zaxxer.hikari.*
+import com.zaxxer.hikari.* // ktlint-disable no-wildcard-imports
 import io.ktor.application.* // ktlint-disable no-wildcard-imports
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
@@ -16,8 +16,9 @@ import midy.routes.apiRoute
 import midy.service.DatabaseFactory
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.dao.exceptions.* // ktlint-disable no-wildcard-imports
-import org.jetbrains.exposed.exceptions.*
+import org.jetbrains.exposed.exceptions.* // ktlint-disable no-wildcard-imports
 import org.jetbrains.exposed.sql.* // ktlint-disable no-wildcard-imports
+import org.postgresql.util.* // ktlint-disable no-wildcard-imports
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -34,9 +35,12 @@ fun Application.module(testing: Boolean = false) {
             call.respond(NotFound)
         }
         exception<ExposedSQLException> {
-            call.respond("Post failed, duplicate time entry")
+            call.respond("Post failed")
         }
-        exception<Throwable> { cause ->
+        exception<PSQLException> {
+            call.respond("DB error")
+        }
+        exception<Throwable> {
             call.respond(HttpStatusCode.InternalServerError)
         }
     }
