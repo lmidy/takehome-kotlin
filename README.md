@@ -3,7 +3,7 @@ This project is an attempt to complete the [SpotHero Engineering Manager Take Ho
 
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 [![language](https://img.shields.io/badge/language-Kotlin-blue)](https://kotlinlang.org/)
-[![Kotlin](https://img.shields.io/badge/kotlin-1.4.32-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.5.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
 
 ## Libraries used:
 - [Kotlin](https://github.com/JetBrains/kotlin) - Programming Language
