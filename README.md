@@ -29,6 +29,7 @@ This project is an attempt to complete the [SpotHero Engineering Manager Take Ho
 ## Getting Started
 - Clone the repo `https://github.com/lmidy/takehome-kotlin.git`
 - `docker compose up` to get the database running
+- In the root directory build the project ` ./gradlew build`
 - In the root directory execute `./gradlew run`
 - By default, the server will start on port 3000, with data migrations running with flyway and storing loading data in docker postgres
 - If you hit this [http://localhost:3000/](http://localhost:3000/) and get a 'Hello World' means the app is running successfully
