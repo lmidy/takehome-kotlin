@@ -14,8 +14,7 @@ import java.time.format.* // ktlint-disable no-wildcard-imports
 val userService = UserWorkedHoursService()
 
 fun Route.users() {
-
-        /*
+    /*
     GET http://localhost:3000/v1/users
     */
     get("users") {
@@ -36,7 +35,7 @@ fun Route.users() {
         }
     }
 
-        /*
+    /*
     POST http://localhost:3000/v1/users/1/worked_hours
    */
     post("users/{id}/worked_hours") {
@@ -55,8 +54,8 @@ fun Route.users() {
                 date = dt,
                 hours = decimalhours,
             )
-            val addedresult = userService.addWorkedHours(userworkedhour)
-            call.respond(HttpStatusCode.Created, "worked_hour inserted")
+            userService.addWorkedHours(userworkedhour)
+            call.respond(HttpStatusCode.Created, "worked hour inserted")
         }
     }
 }

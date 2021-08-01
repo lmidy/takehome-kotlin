@@ -1,6 +1,6 @@
 printf "\n START \n"
 printf "Get all active users- returns: 10 records\n"
-curl http://localhost:3000/v1/users/
+curl http://localhost:3000/v1/users
 
 printf "\n Get all worked_hours for user 1- returns: 6 records\n"
 curl http://localhost:3000/v1/users/1/worked_hours
